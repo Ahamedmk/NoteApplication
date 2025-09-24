@@ -1,0 +1,5 @@
+
+@import "tailwindcss";
+
+/* tokens utilitaires perso si besoin */
+:root { --app-max-w: 1200px; }
