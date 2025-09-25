@@ -65,7 +65,15 @@ return (
 );
 };
 
-
+export async function getCurrentProfile() {
+const { data, error } = await supabase
+.from('profiles')
+.select('full_name, role')
+.eq('user_id', (await supabase.auth.getUser()).data.user?.id)
+.single();
+if (error) throw error;
+return data as { full_name: string | null; role: 'admin'|'teacher'|'parent' };
+}
 export const useAuth = () => {
 const ctx = useContext(AuthContext);
 if (!ctx) throw new Error("useAuth must be used within AuthProvider");
